@@ -1,0 +1,139 @@
+
+#ifndef _HOPFNTLCP_H
+#define _HOPFNTLCP_H
+
+#include <stdio.h>
+#include <stdlib.h>
+
+#define N_HOPFIELD_NEURONS 77
+
+int refer_patt_Crc[] = {
+                           0, 0, 0, 0, 0, 0, 0,
+                           0, 0, 0, 0, 0, 0, 0,
+                           0, 0, 1, 1, 1, 0, 0,
+                           0, 1, 0, 0, 0, 1, 0,
+                           1, 0, 0, 0, 0, 0, 1,
+                           1, 0, 0, 0, 0, 0, 1,
+                           1, 0, 0, 0, 0, 0, 1,
+                           0, 1, 0, 0, 0, 1, 0,
+                           0, 0, 1, 1, 1, 0, 0,
+                           0, 0, 0 ,0 ,0 ,0 ,0,
+                           0, 0, 0, 0, 0, 0, 0
+};
+int test_patt_Crc[]  = {
+                           0, 0, 0, 0, 0, 0, 0,
+                           0, 0, 0, 0, 0, 0, 0,
+                           0, 0, 1, 0, 1, 0, 0,
+                           0, 1, 0, 0, 0, 1, 0,
+                           1, 0, 0, 0, 0, 0, 1,
+                           0, 0, 0, 0, 0, 0, 0,
+                           1, 0, 0, 0, 0, 0, 1,
+                           0, 1, 0, 0, 0, 1, 0,
+                           0, 0, 1, 0, 1, 0, 0,
+                           0, 0, 0 ,0 ,0 ,0 ,0,
+                           0, 0, 0, 0, 0, 0, 0
+};
+
+// Reference and distorted (test) patterns for a triangle
+int refer_patt_Trg[] = {
+                           0, 0, 0, 0, 0, 0, 0,
+                           0, 0, 0, 0, 1, 0, 0,
+                           0, 0, 0, 1, 1, 0, 0,
+                           0, 0, 1, 0, 1, 0, 0,
+                           0, 1, 0, 0, 1, 0, 0,
+                           1, 0, 0, 0, 1, 0, 0,
+                           0, 1, 0, 0, 1, 0, 0,
+                           0, 0, 1, 0, 1, 0, 0,
+                           0, 0, 0, 1, 1, 0, 0,
+                           0, 0, 0 ,0 ,1 ,0 ,0,
+                           0, 0, 0, 0, 0, 0, 0
+};
+int test_patt_Trg[]  = {
+                           0, 0, 0, 0, 0, 0, 0,
+                           0, 0, 0, 0, 1, 0, 0,
+                           0, 0, 0, 1, 1, 0, 0,
+                           0, 0, 1, 0, 0, 0, 0,
+                           0, 0, 0, 0, 0, 0, 0,
+                           1, 0, 1, 0, 1, 0, 0,
+                           0, 0, 0, 0, 1, 0, 0,
+                           0, 0, 1, 0, 0, 0, 0,
+                           0, 0, 0, 0, 0, 0, 0,
+                           0, 0, 0 ,0 ,1 ,0 ,0,
+                           0, 0, 0, 0, 0, 0, 0
+};
+
+// Reference and distorted (test) patterns for a '9'
+int refer_patt_9[]   = {
+                        0, 1, 1, 1, 1, 1, 0,
+                        1, 0, 0, 0, 0, 0, 1,
+                        1, 0, 0, 0, 0, 0, 1,
+                        1, 0, 0, 0, 0, 0, 1,
+                        1, 0, 0, 0, 0, 0, 1,
+                        0, 1, 1, 1, 1, 1, 0,
+                        0, 0, 0, 0, 0, 0, 1,
+                        0, 0, 0, 0, 0, 0, 1,
+                        0, 0, 0, 0, 0, 0, 1,
+                        0, 0, 0, 0, 0, 0, 1,
+                        0, 1, 1, 1, 1, 1, 0 };
+int test_patt_9[]    = {
+                        0, 1, 0, 0, 1, 1, 0,
+                        1, 0, 0, 0, 0, 0, 1,
+                        1, 0, 0, 0, 0, 0, 1,
+                        0, 0, 0, 0, 0, 0, 0,
+                        1, 0, 0, 0, 0, 0, 1,
+                        0, 1, 1, 0, 1, 1, 0,
+                        0, 0, 0, 0, 0, 0, 1,
+                        0, 0, 0, 0, 0, 0, 1,
+                        0, 0, 0, 0, 0, 0, 1,
+                        0, 0, 0, 0, 0, 0, 1,
+                        0, 1, 0, 0, 1, 1, 0 };
+
+// Reference and distorted (test) patterns for a '1'
+int refer_patt_1[]   = {
+                         0, 0, 0, 0, 0, 1, 0,
+                         0, 0, 0, 0, 1, 1, 0,
+                         0, 0, 0, 1, 0, 1, 0,
+                         0, 0, 0, 0, 0, 1, 0,
+                         0, 0, 0, 0, 0, 1, 0,
+                         0, 0, 0, 0, 0, 1, 0,
+                         0, 0, 0, 0, 0, 1, 0,
+                         0, 0, 0, 0, 0, 1, 0,
+                         0, 0, 0, 0, 0, 1, 0,
+                         0, 0, 0, 0, 0, 1, 0,
+                         0, 0, 0, 0, 1, 1, 1 };
+int test_patt_1[]    = {
+                         0, 0, 0, 0, 0, 1, 0,
+                         0, 0, 0, 0, 0, 0, 0,
+                         0, 0, 0, 1, 0, 0, 0,
+                         0, 0, 0, 0, 0, 0, 0,
+                         0, 0, 0, 0, 0, 0, 1,
+                         0, 0, 0, 0, 0, 1, 0,
+                         0, 0, 0, 0, 0, 1, 0,
+                         0, 0, 0, 0, 1, 1, 1,
+                         0, 0, 0, 0, 1, 1, 0,
+                         0, 0, 0, 0, 0, 0, 0,
+                         0, 0, 0, 0, 0, 0, 1 };
+
+
+// Number of reference patterns
+void
+init_hopfield_weights(float weights[N_HOPFIELD_NEURONS][N_HOPFIELD_NEURONS]);
+
+// Function to train the Hopfield network using Hebbian learning
+void
+hebbian_training(float weights[N_HOPFIELD_NEURONS][N_HOPFIELD_NEURONS],
+   int ref_pattern[N_HOPFIELD_NEURONS]
+);
+
+// Function to update the Hopfield network synchronously
+void
+synchronous_update(float weights[N_HOPFIELD_NEURONS][N_HOPFIELD_NEURONS],
+   int dist_pattern[N_HOPFIELD_NEURONS]
+);
+
+// Function to render the reference or distorded patterns
+void
+render_pattern(int pattern[N_HOPFIELD_NEURONS]);
+
+#endif
+

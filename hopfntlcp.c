@@ -1,0 +1,129 @@
+
+#include "hopfntlcp.h"
+
+#define RECALL_ITER   3 // Number of iterations for recall
+#define SPACE_CHAR   32 // Character representing the neuron state (off)  
+#define SOLID_BLOCK 254 // Character representing the neuron state (on)
+
+#define N_REFPATS     3 // Number of patterns to store
+#define N_TESTPATS    3 // Number of distorted patterns to test
+#define N_COL_NEURON  7 // Number of columns for nice printing of patterns
+
+
+float weights[N_HOPFIELD_NEURONS][N_HOPFIELD_NEURONS];
+
+//int* ref_pat_set[]  = { ref_pat_mat_1, 
+//                        ref_pat_mat_4, 
+//                        ref_pat_mat_9
+//                      };
+//
+//int* test_pat_set[] = { test_pat_mat_1, 
+//                        test_pat_mat_4, 
+//                        test_pat_mat_9
+//                      };
+
+int *ref_patterns[]  = {refer_patt_Crc, refer_patt_Trg, refer_patt_9};
+
+int *test_patterns[] = {test_patt_Crc, test_patt_Trg, test_patt_9};
+
+
+
+//           Function prototype implementations 
+//-------------------------------------------------------------------
+void
+init_hopfield_weights(float weights[N_HOPFIELD_NEURONS][N_HOPFIELD_NEURONS])
+{
+   // Initialize Hebbian weight matrix to zeros
+   for (int i = 0; i < N_HOPFIELD_NEURONS; i++) {
+      for (int j = 0; j < N_HOPFIELD_NEURONS; j++)
+         weights[i][j] = 0.0f;
+   }
+}
+
+void
+hebbian_training(float weights[N_HOPFIELD_NEURONS][N_HOPFIELD_NEURONS],
+                 int ref_pattern[N_HOPFIELD_NEURONS]
+                )
+{
+   for (int i = 0; i < N_HOPFIELD_NEURONS; i++) {
+      for (int j = 0; j < N_HOPFIELD_NEURONS; j++) {
+         if (i != j)
+            weights[i][j] += (2 * ref_pattern[i] - 1) * (2 * ref_pattern[j] - 1);
+      }
+   }
+}
+
+void
+synchronous_update(float weights[N_HOPFIELD_NEURONS][N_HOPFIELD_NEURONS],
+                   int test_pattern[N_HOPFIELD_NEURONS]
+                  )
+{
+   int new_neurons[N_HOPFIELD_NEURONS] = { 0 };
+
+   for (int i = 0; i < N_HOPFIELD_NEURONS; i++) {
+      float sum = 0.0;
+      for (int j = 0; j < N_HOPFIELD_NEURONS; j++) {
+         // Convert current state of neuron j (0 or 1 from test_pattern)
+         // to bipolar (-1 or +1)
+         float bipolar_j_state = (test_pattern[j] == 1) ? 1.0f : -1.0f;
+         sum += weights[i][j] * bipolar_j_state; // Use bipolar state in sum
+      }
+      // Determine next state (0 or 1 based on threshold)
+      new_neurons[i] = (sum >= 0) ? 1 : 0;
+   }
+   // Update all neurons simultaneously
+   for (int i = 0; i < N_HOPFIELD_NEURONS; i++) {
+      test_pattern[i] = new_neurons[i];
+   }
+}
+
+
+void
+render_pattern(int pattern[N_HOPFIELD_NEURONS])
+{
+   for (int i = 0; i < N_HOPFIELD_NEURONS; i++) {
+      printf("%c ", pattern[i] ? SOLID_BLOCK : SPACE_CHAR);
+      if ((i + 1) % N_COL_NEURON == 0) {
+         printf("\n");
+      }
+   }
+   printf("\n");
+}
+
+
+
+//-------------------------------------------------------------------
+int main() {
+
+   // Initialize Hebbian Weight matrix
+   init_hopfield_weights(weights);
+
+   printf("\n    Training the Hebbian Weight matrix with %d patterns\n",
+      N_REFPATS);
+
+   for (int i = 0; i < N_REFPATS; i++)
+      hebbian_training(weights, ref_patterns[i]);
+
+   printf("\n----------Training Hebbian Weight matrix complete -----------\n");
+
+   printf("\nRecall process for each test pattern begins...\n");
+   for (int i = 0; i < N_TESTPATS; i++) {
+      printf("Test pattern %d:\n", i + 1);
+      render_pattern(test_patterns[i]);
+
+      printf("Recall process for this test pattern:\n\n");
+      for (int itr = 0; itr < RECALL_ITER; itr++) {
+         synchronous_update(weights, test_patterns[i]);
+
+         printf("Iteration %d:\n", itr + 1);
+         render_pattern(test_patterns[i]);
+         (itr == 2)
+            ? printf("Recall process for this test pattern is complete.\n\n")
+            : printf("Continuing recall process...\n\n");
+      }
+   }
+
+   printf("\n------------------ Recall process finished ------------------\n\n");
+
+   return 0;
+}
