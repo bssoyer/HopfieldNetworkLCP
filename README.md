@@ -10,7 +10,11 @@ For a set of patterns $\{\mu\}$, the weight $w_{ij}$ between neuron $i$ and $j$ 
 
 ### The LCP Strategy: Why Low-Correlation Patterns?
 Standard Hopfield networks trained with Hebbian learning have a limited capacity, which is further reduced when the patterns to be stored are highly correlated (i.e., very similar). High correlation leads to "crosstalk" in the weight matrix, resulting in a cluttered energy landscape, poor recall accuracy, and convergence to spurious states.
+
 ### The LCP and the Coding Challenge
+The LCP relies on a consistent internal representation of the neuron states across all reference patterns. This internal representation must be bipolar (+1/-1). 
+One thought that is tempting to apply for the distinctness of pattern representations is to use different symbols to store each pattern—for example, using the ‘*’ character for encoding a circle pattern or using another character, ‘+’, to store another pattern. However, raw symbols like these shall not improve the distinctness or low correlation among the patterns we want to seek. The network doesn’t “see” the original `0`, `+`, or `*` characters. It only sees the final bipolar`(+1/-1)` vectors. The "distinctness" that allows for stable attractors comes from how different these final bipolar vectors are from each other.
+The way to improve distinctness is to ensure that the **actual shapes** we want to produce on the grid, which then get converted to `(+1/-1)`vectors, are as different as possible. This means minimizing the number of positions where two distinct patterns have a +1 or a -1. We want their bipolar vector representations to be as close to orthogonal. Using different raw symbols before this bipolar conversion doesn't achieve that mathematical distinctness, but the careful design of the shapes does. Therefore, we must use a consistent bipolar `(+1/-1)`mapping for the "on" and "off" states of all the patterns (see next section for this) when the Hopfield network learning processes them and recalls them. The distinctness comes from the differences in the resulting bipolar vectors, not from using varied initial symbols.
 
 
 ### The Chosen Reference Patterns and Their Implications on Network Performance 
