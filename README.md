@@ -11,7 +11,7 @@ For a set of patterns $\{\mu\}$, the weight $w_{ij}$ between neuron $i$ and $j$ 
 ### The LCP Strategy: Why Low-Correlation Patterns?
 Standard Hopfield networks trained with Hebbian learning have a limited capacity, which is further reduced when the patterns to be stored are highly correlated (i.e., very similar). High correlation leads to "crosstalk" in the weight matrix, resulting in a cluttered energy landscape, poor recall accuracy, and convergence to spurious states.
 
-### The LCP and the Coding Challenge
+### The LCP Challenge
 The LCP relies on a consistent internal representation of the neuron states across all reference patterns. This internal representation must be bipolar (+1/-1). 
 One thought that is tempting to apply for the distinctness of pattern representations is to use different symbols to store each pattern—for example, using the ‘*’ character for encoding a circle pattern or using another character, ‘+’, to store another pattern. However, raw symbols like these shall not improve the distinctness or low correlation among the patterns we want to seek. The network doesn’t “see” the original `0`, `+`, or `*` characters. It only sees the final bipolar`(+1/-1)` vectors. The "distinctness" that allows for stable attractors comes from how different these final bipolar vectors are from each other.
 
@@ -105,6 +105,7 @@ This `HopfieldNetworkLCP` is expected to reliably store and recall the chosen se
 
 ### Setting the Environment
 Visual Studio Community 2022 is the preferred platform for running this project, which does not use external libraries or open-source software. However, previous releases of Visual Studio (2019, 2017, 2015, etc.) shall not pose any problems with the source code, because the app is written in plain C language.
- Visit https://visualstudio.microsoft.com/tr/downloads/?cid=learn-onpage-download-install-visual-studio-page-cta to install the community edition.
-After installing Visual Studio Community 2022, click on the solution file `HopfieldNetwork.sln` to open the development environment. 
-Select `> Build > Build HopfieldNetwork`. After the build, you can locate the executable in `C:\...\HopfieldNetwork\x64\Debug` directory.
+
+Visit https://visualstudio.microsoft.com/tr/downloads/?cid=learn-onpage-download-install-visual-studio-page-cta to install the community edition.
+
+After installing Visual Studio Community 2022, click on the solution file `HopfieldNetHebbian.sln` to open the development environment. Select `> Build > Build HopfieldNetworkLCP`. After the build, you can locate the executable in `C:\...\HopfieldNetworkLCP\x64\Debug` directory.
