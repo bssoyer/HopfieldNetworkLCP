@@ -52,15 +52,15 @@ These shapes have fundamentally different structures, leading to less overlap in
 
 This `HopfieldNetworkLCP` is expected to reliably store and recall the chosen set of distinct patterns, demonstrating the effectiveness of using low-correlation inputs to improve Hopfield associative memory performance.
 
-## Patterns Used
-### The Circle Pattern:###
+## Pattern Designs
+### The Circle Pattern ###
 
 | Reference Pattern | Distorted Pattern |
-|-------------------|-------------------|
-|0  0  0  0  0  0  0| 0, 0, 0, 0, 0, 0, 0
-|0, 0, 0, 0, 0, 0, 0| 0, 0, 0, 0, 0, 0, 0
+|:---               |               ---:|
+|0  0  0  0  0  0  0|0  0  0  0  0  0  0|
+ 0, 0, 0, 0, 0, 0, 0| 0, 0, 0, 0, 0, 0, 0
  0, 0, 1, 1, 1, 0, 0| 0, 0, 1, 0, 1, 0, 0
- 0, 1, 0, 0, 0, 1, 0  0, 1, 0, 0, 0, 1, 0
+ 0, 1, 0, 0, 0, 1, 0| 0, 1, 0, 0, 0, 1, 0
  1, 0, 0, 0, 0, 0, 1  1, 0, 0, 1, 0, 0, 1
  1, 0, 0, 0, 0, 0, 1  0, 0, 1, 0, 0, 0, 0
  1, 0, 0, 0, 0, 0, 1  1, 0, 0, 0, 1, 0, 1
@@ -69,8 +69,7 @@ This `HopfieldNetworkLCP` is expected to reliably store and recall the chosen se
  0, 0, 0, 0, 0, 0, 0  0, 0, 0, 0, 0, 0, 0
  0, 0, 0, 0, 0, 0, 0  0, 0, 0, 0, 0, 0, 0	
 
-
-**The Triangle Pattern:**
+### The Triangle Pattern ###
 Reference Pattern	Distorted Pattern
 0, 0, 0, 0, 0, 0, 0,
 0, 0, 0, 0, 1, 0, 0,
@@ -96,9 +95,7 @@ Reference Pattern	Distorted Pattern
 
 
 
-
-
-**The Digit ‘9’ Pattern:**
+### The Digit ‘9’ Pattern ###
 Reference Pattern	Distorted Pattern
 0, 1, 1, 1, 1, 1, 0,
 1, 0, 0, 0, 0, 0, 1,
