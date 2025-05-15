@@ -23,17 +23,26 @@ Each attempt to train more than three patterns has failed. The standard grid siz
 * `1` is primarily a vertical line.
 * `4` involves corners and intersecting lines.
 * `9` involves a loop and a curved or straight descender. They share fewer obvious structural components compared to pairs like `(8, 9)`, `(6, 8)`, `(3, 8)`.
-But this time, the failure to converge to the original digital patterns probably indicated a problem in the learning algorithm itself. After a tedious debugging process, two culprits for this behaviour could be found:
+
+But this time, the failure to converge to the original digital patterns probably indicated a problem in the learning algorithm itself.
+
+After a tedious debugging process, two culprits for this behaviour could be found:
 * Initializing lower triangle only
 * Non-bipolar state updates in `synch_update` function in the `hopfntlcp.c`implemetation file.
+
 After fixing these bugs in the algorithm, the three digits were recalled successfully. 
-However, a grid size of `[15x15]`, 225 neurons, intended to store distinct symbols, still failed, despite the corrected algorithm.  The symbolic patterns involved in this experiment, `'@', '?', '&', '%'` on the `[15x15]` grid, the network struggled after only two patterns. This outcome suggests that even with a larger network (N=225, theoretical capacity for uncorrelated patterns ~31), the specific bitmap representations of these complex symbols likely still possess sufficient underlying correlation or feature overlap to challenge the standard Hebbian learning rule's ability to form distinct and stable attractors for all four.
+However, a grid size of `[15x15]`, 225 neurons, intended to store distinct symbols, still failed, despite the corrected algorithm.  The symbolic patterns involved in this experiment, `'@', '?', '&', '%'` on the `[15x15]` grid, the network struggled after only two patterns. 
+
+This outcome suggests that even with a larger network (N=225, theoretical capacity for uncorrelated patterns ~31), the specific bitmap representations of these complex symbols likely still possess sufficient underlying correlation or feature overlap to challenge the standard Hebbian learning rule's ability to form distinct and stable attractors for all four.
+
 The process of superimposing multiple complex patterns seems to lead to a very intricate energy landscape where small basins of attraction or spurious minima become dominant for some inputs. It highlights the sensitivity of the basic Hopfield model to the nature and number of patterns being stored, even when visual distinctiveness is attempted.
 Overall, the project demonstrates both the Hopfield network's capabilities and well-known limitations, particularly the impact of pattern correlation and the challenges in scaling storage with complex patterns using simple Hebbian learning.
+
 Assuming we have learned from the discussions above, we will decisively design patterns for their **low mutual correlation**. The patterns are:
 * A simple geometric shape: a Circle
 * Another distinct geometric shape: a Triangle
  * A numerical digit: '9'
+
 These shapes have fundamentally different structures, leading to less overlap in their vector representations. This should result in:
 * A cleaner "energy landscape" with more distinct and stable attractors for each stored pattern.
 * Reduced interference between stored memories.
@@ -44,9 +53,10 @@ These shapes have fundamentally different structures, leading to less overlap in
 This `HopfieldNetworkLCP` is expected to reliably store and recall the chosen set of distinct patterns, demonstrating the effectiveness of using low-correlation inputs to improve Hopfield associative memory performance.
 
 ## Patterns Used
-**The Circle Pattern: **
+### The Circle Pattern:###
 
 | Reference Pattern | Distorted Pattern |
+|-------------------|-------------------|
 |0  0  0  0  0  0  0| 0, 0, 0, 0, 0, 0, 0
 |0, 0, 0, 0, 0, 0, 0| 0, 0, 0, 0, 0, 0, 0
  0, 0, 1, 1, 1, 0, 0| 0, 0, 1, 0, 1, 0, 0
