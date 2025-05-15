@@ -91,29 +91,17 @@ This `HopfieldNetworkLCP` is expected to reliably store and recall the chosen se
 
 | Reference Pattern | Distorted Pattern |
 |-------------------|-------------------|
-|0  1  1  1  1  1  0|0  0  0  0  0  0  0|
-|1  0  0  0  0  0  1|0  0  0  0  1  0  0|
-|1  0  0  0  0  0  1|0  0  0  1  1  0  0|
-|1  0  0  0  0  0  1|0  0  1  0  0  0  0|
+|0  1  1  1  1  1  0|0  1  0  0  1  1  0|
+|1  0  0  0  0  0  1|1  0  0  0  0  0  1|
+|1  0  0  0  0  0  1|1  0  0  0  0  0  1|
 |1  0  0  0  0  0  1|0  0  0  0  0  0  0|
-|0  1  1  1  1  0  0|1  0  1  0  1  0  0|
-|0  0  0  0  0  0  1|0  0  0  0  1  0  0|
-|0  0  0  0  0  0  1|0  0  1  0  0  0  0|
-|0  0  0  0  0  0  1|0  0  0  0  0  0  0|
-|0  0  0  0  0  0  1|0  0  0  0  1  0  0|
-|0  1  1  1  1  1  0|0  0  0  0  0  0  0|
-
-0, 1, 0, 0, 1, 1, 0,
-1, 0, 0, 0, 0, 0, 1,
-1, 0, 1, 1, 0, 0, 1,
-0, 0, 0, 0, 0, 0, 0,
-1, 0, 0, 0, 0, 0, 1,
-0, 0, 1, 0, 1, 1, 0,
-0, 1, 0, 0, 0, 0, 0,
-0, 0, 1, 0, 1, 0, 0,
-0, 0, 0, 0, 0, 0, 1,
-0, 0, 0, 0, 0, 0, 1,
-0, 1, 0, 0, 1, 1, 0
+|1  0  0  0  0  0  1|1  0  0  0  0  0  1|
+|0  1  1  1  1  0  0|0  0  1  0  1  1  0|
+|0  0  0  0  0  0  1|0  1  0  0  0  0  0|
+|0  0  0  0  0  0  1|0  0  1  0  1  0  0|
+|0  0  0  0  0  0  1|0  0  0  0  0  0  1|
+|0  0  0  0  0  0  1|0  0  0  0  0  0  1|
+|0  1  1  1  1  1  0|0  1  0  0  1  1  0|
 
 ### Setting the Environment
 Visual Studio Community 2022 is the preferred platform for running this project, which does not use external libraries or open-source software. However, previous releases of Visual Studio (2019, 2017, 2015, etc.) shall not pose any problems with the source code, because the app is written in plain C language.
