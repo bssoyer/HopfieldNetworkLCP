@@ -12,9 +12,9 @@
 
 float weights[N_HOPFIELD_NEURONS][N_HOPFIELD_NEURONS];
 
-int* ref_patterns[] = {refer_patt_Crc, refer_patt_Trg, refer_patt_9,
-                       refer_patt_4, refer_patt_1
-                      };
+int* ref_patterns[]  = {refer_patt_Crc, refer_patt_Trg, refer_patt_9,
+                        refer_patt_4, refer_patt_1
+                       };
 
 int *test_patterns[] = {test_patt_Crc, test_patt_Trg, test_patt_9, 
                         test_patt_4, test_patt_1

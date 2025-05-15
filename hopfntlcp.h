@@ -2,13 +2,17 @@
 #ifndef _HOPFNTLCP_H
 #define _HOPFNTLCP_H
 
+// This Hopfield network can recall at most three distinct patterns
+// successfully. See the README.md file for details. 
+// The patterns are stored in a 1D array of size N_HOPFIELD_NEURONS,
+// are represented as 0s and 1s, where 0 represents an inactive neuron
+// and 1 represents an active neuron.
+
 #include <stdio.h>
 #include <stdlib.h>
 
 #define N_HOPFIELD_NEURONS 77
 
-// This Hopfield network obviously can recall at most three distinct patterns
-// successfully. See the README.md file for details. 
 int refer_patt_Crc[] = {
                            0, 0, 0, 0, 0, 0, 0,
                            0, 0, 0, 0, 0, 0, 0,
@@ -47,7 +51,7 @@ int refer_patt_Trg[] = {
                            0, 1, 0, 0, 1, 0, 0,
                            0, 0, 1, 0, 1, 0, 0,
                            0, 0, 0, 1, 1, 0, 0,
-                           0, 0, 0 ,0 ,1 ,0 ,0,
+                           0, 0, 0 ,0, 1, 0, 0,
                            0, 0, 0, 0, 0, 0, 0
 };
 int test_patt_Trg[]  = {
@@ -60,7 +64,7 @@ int test_patt_Trg[]  = {
                            0, 0, 0, 0, 1, 0, 0,
                            0, 0, 1, 0, 0, 0, 0,
                            0, 0, 0, 0, 0, 0, 0,
-                           0, 0, 0 ,0 ,1 ,0 ,0,
+                           0, 0, 0, 0, 1, 0, 0,
                            0, 0, 0, 0, 0, 0, 0
 };
 
